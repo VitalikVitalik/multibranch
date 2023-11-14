@@ -4,7 +4,19 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello, World!'
+                script {
+                    // Determine the current branch
+                    def currentBranch = env.BRANCH_NAME
+
+                    // Check the branch and execute the corresponding echo command
+                    if (currentBranch == 'dev') {
+                        echo 'Now we are in dev branch'
+                    } else if (currentBranch == 'main') {
+                        echo 'Now we are in main branch'
+                    } else {
+                        echo "Now we are in branch: ${currentBranch}"
+                    }
+                }
             }
         }
     }
